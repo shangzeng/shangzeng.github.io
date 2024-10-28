@@ -1,0 +1,400 @@
+<html>
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>基于企业安全的近源渗透 | shangzeng </title>
+
+<link rel="shortcut icon" href="https://shangzeng.club/favicon.ico?v=1730104551981">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://shangzeng.club/styles/main.css">
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"> -->
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/9.12.0/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/9.12.0/languages//dart.min.js"></script>
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script> -->
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+    
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="/">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            shangzeng 
+        </div>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" id="changeNavbar">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+            <div class="nav-item">
+                
+                <a href="/" class="menu gt-a-link">
+                    首页
+                </a>
+                
+            </div>
+            
+            <div class="nav-item">
+                
+                <a href="/archives" class="menu gt-a-link">
+                    归档
+                </a>
+                
+            </div>
+            
+            <div class="nav-item">
+                
+                <a href="/tags" class="menu gt-a-link">
+                    标签
+                </a>
+                
+            </div>
+            
+            <div class="nav-item">
+                
+                <a href="/post/about" class="menu gt-a-link">
+                    关于
+                </a>
+                
+            </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1730104551981"
+                action="/search/">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+<script>
+    /* 移动端导航栏展开/收起切换 */
+    document.getElementById('changeNavbar').onclick = () => {
+        var element = document.getElementById('navbarSupportedContent');
+        if (element.style.display === 'none' || element.style.display === '') {
+            element.style.display = 'block';
+        } else {
+            element.style.display = 'none';
+        }
+    }
+</script>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    基于企业安全的近源渗透
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2024-08-02 ·
+                    </time>
+                    
+                </div>
+                <div class="post-content">
+                    <!-- more -->
+<blockquote>
+<p>领导要求，研究下wifi安全相关信息，于是有了下面的基本资料 ，首先我们需要了解一些基本的资料信息，首先就是什么是wifi,什么是网卡，他们是怎么进行运作的。</p>
+</blockquote>
+<h2 id="1-背景">1. 背景</h2>
+<p><strong>网卡</strong>是一块被设计用来允许计算机在计算机网络上进行通讯的计算机硬件。由于其拥有MAC地址，因此属于OSI模型的第1层和2层之间。它使得用户可以通过电缆或无线相互连接。简单说就是计算机通过网卡接入局域网或者互联网，网卡简单分为<strong>有线网卡</strong>和<strong>无线网卡</strong> ， 其中无线网卡主要是通过无线连接网络进行上网使用的无线终端设备。通俗地说无线网卡是一种不需要连接网线的设备。</p>
+<blockquote>
+<p>我们需要购买一个免驱的无线网卡，用于后续的监听工作, 这里去关键字搜索 kali 无线免驱就可以了</p>
+</blockquote>
+<p><strong>Wi-Fi</strong>： WiFi 全称 <code>Wireless Fidelity</code>，Wi-Fi是一种无线技术，用于使设备（如电脑、手机、平板电脑）能够通过无线信号连接到互联网或局域网。它允许设备通过无线路由器或接入点（Access Point）进行通信，而不需要使用传统的有线连接。又称为<code>802.11b</code>标准。<code>Wireless Fidelity</code>翻译过来是<code>无线保真</code>，其中保真是指要求在无线网络中可靠地传输数据。 是一种协议，其中我们需要知道以下的一些知识点：</p>
+<ul>
+<li><strong>SSID(Service Set Identifier) 服务集标识符</strong>: SSID便是你给自己的无线网络所取的名字，用来标识某一无线局域网的唯一标识符，无线客户端用它入网后与接入点进行通信。SID的设置可以是公开的（可被检测到）或隐藏的（不）会被广播）。然而，隐藏 SSID 并不能提高安全性，因为它仍然可以在某些情况下被探测到。</li>
+<li><strong>AP(Access Point) 无线访问点或接入点:</strong> AP是连接宽带网络与无线设备的设备。它允许Wi-Fi设备连接到宽带网络，并为这些设备提供无线接入。通常，家庭网络或办公室网络会有一个或多个AP来提供Wi-Fi覆盖。</li>
+<li><strong>WPA:</strong> 全称是 WiFi Protected Access，WiFi访问保护，常用的无线网络认证机制之一，目前有WPA、WPA2、WPA3三个标准，并且分为个人和企业的WPA-Personal和WPA-Enterprise两种。它是为了完善WEP加密方式的安全性不足应运而生的一种加密方式</li>
+<li>**MAC地址:**MAC地址是设备的唯一标识符。MAC地址过滤是一种安全措施，允许或阻止特定设备连接到Wi-Fi网络，通过限制只指定MAC地址的设备访问网络来增加安全性。</li>
+</ul>
+<p>与有线网络相比，WiFi是利用无线电波进行数据传输的，不需要物理线路上的连接，但也正是因为这种传播特性，无线网络更容易受到入侵。在了解了以上的基本知识后，可以进行一些常见的工具使用和我们需要的一些应用场景了，其中常用的工具如下：</p>
+<ul>
+<li><strong>Wireshark</strong>是一个流行的网络协议分析工具，可用于捕获和分析网络流量。它能够显示Wi-Fi网络中传输的数据包，帮助识别潜在的安全问题和漏洞。</li>
+<li><strong>Kismet</strong>是一个无线网络探测工具，用于侦察周围的Wi-Fi网络。它可以检测隐藏的SSID、探测潜在的入侵者和执行其他无线网络审计任务。</li>
+<li><strong>Aircrack-ng</strong>是一个用于评估Wi-Fi网络安全性的套件，主要用于渗透测试和研究。它包含一些工具，可用于破解Wi-Fi密码、攻击WEP和WPA/WPA2-PSK等。</li>
+<li><strong>MDK3</strong>是一个用于测试Wi-Fi网络的工具，主要用于创建Wi-Fi网络上的干扰。它可以执行多种攻击，如断开连接、干扰网络、强制让客户端重新连接等。需要注意的是，它的使用需要谨慎，因为它可能导致网络服务中断或其他问题。</li>
+<li><strong>WiFiPumpkin3</strong>是一个便捷的框架，用于执行各种Wi-Fi安全测试。它提供了针对无线网络的渗透测试和攻击的功能，包括中间人攻击、DNS欺骗、网络钓鱼等。这个工具可以模拟攻击者对网络进行的各种攻击，以帮助评估网络的安全性，并且可以用于教育和研究目的。</li>
+<li><strong>Fern Wi-Fi Cracker</strong>：一个用于无线网络渗透测试的图形化工具，能够帮助用户轻松执行各种攻击。</li>
+</ul>
+<p>接下来我们会使用以上工具进行以下操作：</p>
+<pre><code class="language-bash">社会工程学攻击模拟： 通过使用WiFiPumpkin3等工具创建虚假的钓鱼热点或进行网络钓鱼攻击，评估网络用户对于社会工程学攻击的防范程度。
+无线网络干扰测试： MDK3等工具可用于制造干扰，强制使设备断开连接或无法连接到网络，从而测试网络的稳定性和恢复能力。
+无线网络加密破解： 使用工具如Aircrack-ng、Reaver等，可以对Wi-Fi密码进行暴力破解或利用WPS弱点进行攻击，以测试网络的密码强度和安全性。
+无线网络探测和侦察： Kismet、Nmap等工具可用于侦察附近的无线网络，收集信息，探测隐藏的SSID以及识别网络漏洞。
+身份验证和访问控制测试： 使用工具测试网络的身份验证机制，例如尝试绕过MAC地址过滤或评估网络对未经授权设备的访问控制。
+漏洞评估和渗透测试：Metasploit等工具可以用于发现和利用Wi-Fi网络中的漏洞，模拟攻击并评估网络的安全性。
+</code></pre>
+<p>接下来我们需要插入网卡，进行操作，我这里是使用了虚拟机的kali进行操作，首先看看网卡配置是否成功：</p>
+<pre><code class="language-bash">┌──(parallels㉿kali-linux-2022-2)-[~]
+└─$ iwconfig # 显示网卡 
+# lo - 这是本地环回接口，通常用于本地主机内部通信。在这里显示的内容表明该接口没有无线扩展（no wireless extensions），意味着该接口并非用于无线通信。
+lo        no wireless extensions.
+# 这是以太网接口，用于有线网络连接。与第一个接口一样，也显示没有无线扩展。
+eth0      no wireless extensions.
+# IEEE 802.11 - 这表示该网卡支持 IEEE 802.11 标准，即 Wi-Fi 标准。
+# ESSID: off/any - 当显示为 &quot;off&quot; 时，表示该接口当前没有连接到任何网络（ESSID指的是网络的名称）。&quot;any&quot; 表示该接口可连接到任何可用的无线网络。
+# Mode: Managed - 表示网卡当前工作在&quot;Managed&quot;模式，这是一种典型的客户端模式，用于连接到无线接入点。
+# Access Point: Not-Associated - 这表示当前该网卡未连接到任何接入点（Access Point）。
+# Tx-Power=20 dBm - 这是该无线网卡的发送功率。
+# Power Management: off - 表示该网卡的电源管理功能被关闭，这意味着它不会在空闲时进入省电模式。
+wlan0     IEEE 802.11  ESSID:off/any  
+          Mode:Managed  Access Point: Not-Associated   Tx-Power=20 dBm   
+          Retry short limit:7   RTS thr:off   Fragment thr:off
+          Power Management:off
+
+
+</code></pre>
+<p>此时物理环境已经准备就绪，接下来就是软件部分与功能实施了。</p>
+<h2 id="2-wifipumpkin3-使用指南">2. wifipumpkin3 使用指南</h2>
+<p>安装命令如下：</p>
+<pre><code class="language-bash">sudo apt install wifipumpkin3 # 安装
+sudo wp3 # 启动
+</code></pre>
+<p>其中常见的基础命令如下：</p>
+<pre><code class="language-bash">ap: 显示接入点 (AP) 的所有变量和状态。
+set：	设置变量代理，插件和访问点，此命令集类似于metasploit set命令
+plugins：	显示所有可用的插件及其状态。
+</code></pre>
+<h3 id="21-创建一个钓鱼-wifi-并进行监听">2.1  创建一个钓鱼 wifi 并进行监听</h3>
+<blockquote>
+<p><strong>无线接口 (Wireless Interface)</strong>: 无线接口是计算机上的一个虚拟接口，允许计算机通过无线方式与其他网络设备通信。例如，当您使用笔记本电脑连接到WiFi网络时，就是通过无线接口实现的。常见的无线接口名称如 <code>wlan0</code>、<code>wlan1</code> 等。</p>
+<p><code>iwconfig</code> 是一个Linux命令，用于查看和配置无线网络接口的参数。它与 <code>ifconfig</code> 命令类似，但 <code>ifconfig</code> 针对所有网络接口，而 <code>iwconfig</code> 专门针对无线接口。</p>
+</blockquote>
+<p>要判断一个无线网卡是否可以用于 <code>wifipumpkin3</code> 或其他类似工具，您需要确保它支持以下特性：</p>
+<ol>
+<li><strong>监视模式 (Monitor Mode)</strong>: 允许网卡捕获网络上的所有数据包，而不仅仅是发给该网卡的数据包。</li>
+<li><strong>数据包注入 (Packet Injection)</strong>: 允许网卡发送自定义数据包。</li>
+</ol>
+<p>在确定无线网卡可以使用后，就可以进行设置了：</p>
+<pre><code class="language-bash">set interface wlan0 # 设置无线网卡 ， 名称 使用iwconfig 进行查看
+set ssid hello # 设置无线网信号
+set proxy noproxy # 设置插件
+ignore pydns_server # 设置dns转发
+start # 开始攻击 
+</code></pre>
+<p>连接成功后使用命令<strong>ap</strong>进行查看<br>
+<img src="https://shangzeng.club/post-images/1722583080522.jpg" alt="" loading="lazy"></p>
+<h2 id="3-aircrack-ng-使用指南">3. Aircrack-ng  使用指南</h2>
+<p>Aircrack-ng 是一个完整的套件，用于评估无线网络的安全性。它是一系列的工具，每个工具都有其特定的用途，共同协作以分析、监控、攻击以及破解无线网络。Aircrack-ng 常常被使用于无线安全研究、渗透测试以及防御性评估。Aircrack-ng 套件中的主要工具有：</p>
+<ol>
+<li><strong>airmon-ng</strong>：用于将无线网卡切换到监视模式。</li>
+<li><strong>airodump-ng</strong>：用于捕获无线网络的数据包并列出附近的无线网络。</li>
+<li><strong>aireplay-ng</strong>：用于发送数据包到无线网络，通常用于生成流量或执行特定的攻击，如解除认证攻击。</li>
+<li><strong>aircrack-ng</strong>：无线密码破解工具，常用于破解WEP和WPA/WPA2密码。</li>
+<li><strong>airbase-ng</strong>：用于创建伪造的无线接入点。</li>
+<li><strong>airserv-ng</strong>：使得你可以远程访问无线网卡。</li>
+<li><strong>airdecap-ng</strong>：用于解密无线流量数据包。</li>
+</ol>
+<p>这些工具共同提供了一个完整的解决方案，可以对无线网络进行各种分析和攻击。如果你需要查看 Aircrack-ng 的帮助文档和命令选项，可以运行以下命令：</p>
+<pre><code class="language-bash">aircrack-ng --help
+</code></pre>
+<p>其中一些常见的命令如下：</p>
+<pre><code class="language-bash">┌──(parallels㉿kali-linux-2022-2)-[~]
+└─$ sudo airmon-ng # 查看可以使用的网卡            
+PHY     Interface       Driver          Chipset
+# PHY：这列显示了物理无线设备的标识符。在这个例子中，使用的是 phy3，它代表了一个物理无线设备。
+# Interface：这列显示了无线网卡的接口名。在这个例子中，接口名是 wlan0。
+# Driver：这列显示了驱动程序名称。在这个例子中，使用的是 mt7601u 驱动程序。
+# Chipset：这列显示了无线芯片的信息。在这个例子中，芯片是 Ralink Technology, Corp. MT7601U，这是 Ralink 公司生产的 MT7601U 芯片，用于支持无线网络功能。
+phy3    wlan0           mt7601u         Ralink Technology, Corp. MT7601U
+┌──(parallels㉿kali-linux-2022-2)-[~]
+└─$ sudo airmon-ng check kill # 用于删除干扰的进程
+┌──(parallels㉿kali-linux-2022-2)-[~]
+└─$ sudo airmon-ng start wlan0 # 启动无线网卡 wlan0 的监控模式。
+PHY     Interface       Driver          Chipset
+phy3    wlan0           mt7601u         Ralink Technology, Corp. MT7601U
+                (mac80211 monitor mode already enabled for [phy3]wlan0 on [phy3]wlan0)
+
+</code></pre>
+<p>如果 <code>wlan0</code> 成功地进入了 <code>monitor mode（监听模式）</code> ，可以使用iwconfig进行查看</p>
+<figure data-type="image" tabindex="1"><img src="https://shangzeng.club/post-images/1722583135241.jpg" alt="" loading="lazy"></figure>
+<p><strong>测试数据包注入</strong>: 使用 <code>aireplay-ng</code> 来测试数据包注入:</p>
+<pre><code class="language-bash">sudo aireplay-ng --test wlan0mon
+sudo airmon-ng stop wlan0mon  # 测试完毕后关闭网卡
+</code></pre>
+<p>如果您看到类似于 &quot;Injection is working!&quot; 的消息，那么网卡支持数据包注入。不是所有的无线网卡都支持这些特性。在选择无线网卡时，最好提前查看其规格和兼容性列表（我这就是不行的）.</p>
+<h3 id="30-将无线网卡以监听模式启动">3.0 将无线网卡以监听模式启动</h3>
+<p>在工具Aircrack-ng中，将无线网卡以监听模式启动意味着将无线网卡设置为一种特殊模式，该模式允许它监听并捕获周围的无线网络流量，而不仅仅是连接到一个特定的无线网络。监听模式也被称为&quot;监控模式&quot;或&quot;混杂模式&quot;，这些术语有时可以互换使用，但它们在某些情况下可能略有不同的含义。下面我将详细解释监听模式的含义和其用途：</p>
+<ol>
+<li>
+<p>监听模式是什么？ 监听模式是无线网卡的一种工作模式，它使无线网卡能够在不连接到任何特定网络的情况下监控并捕获周围的无线数据包。通常，无线网卡在连接到一个特定的无线网络时处于&quot;管理模式&quot;，用于正常的数据传输，而在监听模式下，它会捕获无线信道上的所有数据包，而不仅仅是它所连接的网络的数据包。</p>
+</li>
+<li>
+<p>监听模式的作用： 监听模式在网络安全领域非常有用，特别是在以下情况下：</p>
+<ul>
+<li>网络分析：通过监听模式，您可以捕获周围的无线数据流量，以分析网络的性能、流量模式和设备行为。</li>
+<li>安全测试：网络管理员和安全专家可以使用监听模式来识别潜在的网络漏洞、检测未经授权的设备或不安全的配置，以提高网络的安全性。</li>
+<li>破解无线密码：监听模式还可以用于破解无线网络密码。通过捕获WPA/WPA2加密的握手包，然后使用工具如Aircrack-ng来尝试破解网络密码。</li>
+</ul>
+</li>
+<li>
+<p>如何启用监听模式（以Aircrack-ng为例）： 启用监听模式通常需要管理员权限，并且具体的步骤可能因不同的操作系统和无线网卡而异。以下是在Linux系统中使用Aircrack-ng工具启用监听模式的一般步骤：</p>
+<ul>
+<li>
+<p>打开终端窗口，并确保您已安装Aircrack-ng工具。</p>
+</li>
+<li>
+<p>使用以下命令来查看您的无线网卡的名称：</p>
+<pre><code class="language-bash">iwconfig
+</code></pre>
+</li>
+<li>
+<p>停用当前无线网卡连接（如果有的话）：</p>
+<pre><code class="language-bash">sudo ifconfig wlan0 down
+</code></pre>
+<p>这里的 &quot;wlan0&quot; 应替换为您的无线网卡名称。</p>
+</li>
+<li>
+<p>启用监听模式：</p>
+<pre><code class="language-bash">sudo airmon-ng start wlan0
+iwconfig wlan0 mode monitor   # 开启网卡的监听模式  
+sudo airodump-ng wlan0 # 先尝试监听下看看好使不好使 
+airodump-ng wlan0 -w /home/ls # 开启监听模式，监听数据写入 /home/ls-01.csv这个文件夹 
+# 注意每次开启后会存储在新的文件中 ls-02.csv ， ls-03.csv 以此类推
+</code></pre>
+<p>这将在无线网卡上启用监听模式，并为其分配一个新的接口名称，通常是 &quot;wlan0mon&quot; 或类似的。</p>
+</li>
+<li>
+<p>现在，您的无线网卡已经在监听模式下运行，可以使用Aircrack-ng工具来捕获和分析无线数据包。这将列出附近的所有无线网络及其详细信息，如 BSSID、ESSID、加密方式、信号强度等。<br>
+<img src="https://shangzeng.club/post-images/1722583183334.jpg" alt="" loading="lazy"></p>
+</li>
+</ul>
+</li>
+</ol>
+<p>在无线网卡设置为监听模式（例如，将 &quot;wlan0&quot; 设置为监听模式），会出现以下影响：</p>
+<ol>
+<li>无法连接到普通无线网络：无线网卡在监听模式下不再能够连接到常规的无线网络，因为它不会主动关联或连接到任何特定的SSID（无线网络名称）。这是因为它的主要任务是监听并捕获数据包，而不是建立网络连接。</li>
+<li>新接口名称：通常，在监听模式下，无线网卡会被分配一个新的接口名称，通常是 &quot;wlan0mon&quot; 或类似的名称，以区分它与正常管理模式下的无线接口。您将使用这个新名称来操作无线网卡。</li>
+</ol>
+<p>一旦无线网卡启用监听模式，它通常就不能连接到无线热点或普通的无线网络了。监听模式的主要目的是捕获和分析周围的数据包，而不是建立或维护网络连接。这是因为在监听模式下，无线网卡会专注于监听所有信道上的数据包，而不会关联到特定的无线网络或连接到热点。</p>
+<p>如果您需要连接到一个热点或普通的无线网络，您需要将无线网卡切换回管理模式或者停用监听模式，然后重新连接到所需的网络。在Linux系统中，通常可以使用以下命令来停用监听模式并将无线网卡切换回管理模式：</p>
+<pre><code class="language-bash">sudo airmon-ng stop &lt;接口名称&gt;
+</code></pre>
+<h3 id="31-破解无线wi-fi密码">3.1 破解无线Wi-Fi密码</h3>
+<p>首先需要扫描周边wifi 命令就是上文的</p>
+<pre><code class="language-bash">sudo airmon-ng start wlan0
+sudo airodump-ng wlan0
+</code></pre>
+<figure data-type="image" tabindex="2"><img src="https://shangzeng.club/post-images/1722583231684.jpg" alt="" loading="lazy"></figure>
+<p>然后抓取握手包并保存为文件</p>
+<pre><code class="language-bash"># -c指定信道，一定要是上一步查到的要破解的wifi所用信道
+# -bssid指定bssid值，一定要是上一步查到的要破解的wifi的bssid
+# -w指定捕获的握手到保存到的文件名
+sudo airodump-ng -c 6 --bssid 3E:80:4A:A2:15:F8 -w /home/parallels/Desktop wlan0
+</code></pre>
+<p>如下图所示，我们抓到了让其重新认证的B0:D5:9D:42:FA:A3的握手包。使用Ctrl+C终止抓包命令即可（我这里不知道什么原因没有抓到握手包）</p>
+<p>此时会在指定的目录产生以下四个文件（每执行一次抓包命令就会产生一组，所以抓包时要注意自己是第几次执行的；不管也行下一步执定文件时使用*号通配符即可）（这个也灭有）</p>
+<p>最后 ， 使用字典文件暴力破解密码</p>
+<pre><code class="language-bash"># -w指定要使用口令字典文件
+# -b指定要目标wifi的mac地址（亦即bssid）
+# wifi_ivs_file*.cap是抓取到握手包的数据包文件，*是通配符
+aircrack-ng -w /usr/share/nmap/nselib/data/passwords.lst -b B0:D5:9D:42:FA:A3 /root/Desktop/wifi_ivs_file*.cap
+</code></pre>
+<p>如果字典文件中存在wifi的密码，那就能找到wifi的密码，如果不包含那就找不到。（所以笼统地讲wifi成功破解率依赖于字典大小）</p>
+<blockquote>
+<p>一个用于查找Wi-Fi默认密码的网站 https://www.routerpasswords.com/</p>
+</blockquote>
+<p>或者，我们可以使用图形化界面进行操作</p>
+<pre><code class="language-bash">sudo fern-wifi-cracker
+</code></pre>
+<h2 id="3-mdk3-使用指南">3.  mdk3 使用指南</h2>
+<p>mdk3（Moral Decay Killer 3）是一个强大的无线网络渗透测试工具，它被设计用于测试和保护无线网络的安全性。</p>
+<ul>
+<li>mdk3是一个基于命令行的工具，通常在Linux操作系统上使用。</li>
+<li>它专注于无线网络攻击和测试，提供多种攻击模式，如断开连接、干扰、欺骗、淹没和其他与无线网络相关的攻击。</li>
+<li>mdk3工具的目标包括评估无线网络的安全性、测试网络的可用性，以及识别潜在的漏洞。</li>
+</ul>
+<h3 id="31-使用-mdk3-攻击热点">3.1 使用 mdk3 攻击热点</h3>
+<ol>
+<li>
+<p><strong>Deauthentication Attack（去认证攻击）：</strong> 这个攻击模式可以用来断开无线网络上的连接，通常是通过向特定的客户端发送虚假去认证请求。这可以用来测试网络的可用性和安全性，以及验证网络是否容易受到去认证攻击。</p>
+<p>示例命令：</p>
+<pre><code class="language-bash">mdk3 wlan0mon d -c 06:74:9C:F4:FB:FB # 攻击命令需要知道MAC地址
+mdk3 wlan0mon a -a 06:74:9C:F4:FB:FB # 攻击命令需要知道MAC地址
+</code></pre>
+<p>上述命令将在通道6上执行去认证攻击3。</p>
+</li>
+<li>
+<p><strong>Beacon Flooding Attack（信标淹没攻击）：</strong> 这个攻击模式通过发送大量虚假信标帧来淹没目标网络，使其不可用。这可以测试网络的弹性和稳定性。</p>
+<p>示例命令：</p>
+<pre><code class="language-bash"># sudo mdk3 &lt;接口&gt; b -n &lt;信标数目&gt; -a &lt;虚假AP SSID&gt;
+sudo mdk3 wlan0mon b -n 100 -a 06:74:9C:F4:FB:FB
+</code></pre>
+<p>这将启动信标淹没攻击。</p>
+</li>
+<li>
+<p><strong>其他攻击模式：</strong> mdk3还提供了其他攻击模式，如关联攻击、Flood攻击、以及一些特定目标攻击。每个攻击模式都有不同的选项和用途。</p>
+</li>
+</ol>
+<p>攻击成功需要关闭安全认证， 这里是关闭了安全认证后进行攻击，热点失效</p>
+<figure data-type="image" tabindex="3"><img src="https://shangzeng.club/post-images/1722583293589.jpg" alt="" loading="lazy"></figure>
+<h2 id="4-其他">4. 其他</h2>
+<p>浅谈 Wi-Fi安全 https://www.cnblogs.com/Cl0ud/p/16817582.html</p>
+<p>一个看起来还行的视频教程 https://www.bilibili.com/video/BV1mT4y1R7er/?vd_source=2e14c96c99b2d69839b6834e4d34d6ee</p>
+
+                </div>
+            </article>
+        </div>
+
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">网络安全/CTF/SRC/摄影/调酒 以上内容全不精通 </div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://shangzeng.club="_blank">shangzeng</a>
+    </div>
+    <div>
+        Theme <a href="https://github.com/imhanjie/gridea-theme-pure" target="_blank">Pure</a>, Powered by <a
+                href="https://gridea.dev" target="_blank">Gridea</a> | <a href="https://shangzeng.club/atom.xml" target="_blank">RSS</a>
+    </div>
+</div>
+
+<script>
+  hljs.highlightAll()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://shangzeng.club</id>
+    <title>shangzeng </title>
+    <updated>2024-10-28T08:35:59.573Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://shangzeng.club"/>
+    <link rel="self" href="https://shangzeng.club/atom.xml"/>
+    <subtitle>网络安全/CTF/SRC/摄影/调酒 以上内容全不精通 </subtitle>
+    <logo>https://shangzeng.club/images/avatar.png</logo>
+    <icon>https://shangzeng.club/favicon.ico</icon>
+    <rights>All rights reserved 2024, shangzeng </rights>
+    <entry>
+        <title type="html"><![CDATA[小程序抓包与处理]]></title>
+        <id>https://shangzeng.club/post/xiao-cheng-xu-zhua-bao-yu-chu-li/</id>
+        <link href="https://shangzeng.club/post/xiao-cheng-xu-zhua-bao-yu-chu-li/">
+        </link>
+        <updated>2024-10-28T08:18:49.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[MAC终端的学习与美化]]></title>
+        <id>https://shangzeng.club/post/mac-zhong-duan-de-xue-xi-yu-mei-hua/</id>
+        <link href="https://shangzeng.club/post/mac-zhong-duan-de-xue-xi-yu-mei-hua/">
+        </link>
+        <updated>2024-08-06T16:35:44.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[近期的CTF比赛总结[2024上半年]]]></title>
+        <id>https://shangzeng.club/post/shangbannian/</id>
+        <link href="https://shangzeng.club/post/shangbannian/">
+        </link>
+        <updated>2024-08-04T16:16:30.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[基于企业安全的近源渗透]]></title>
+        <id>https://shangzeng.club/post/wo-wu-wu-wu-wu/</id>
+        <link href="https://shangzeng.club/post/wo-wu-wu-wu-wu/">
+        </link>
+        <updated>2024-08-02T06:03:34.000Z</updated>
+    </entry>
+</feed>
